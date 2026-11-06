@@ -22,6 +22,8 @@ One bounded query retrieves the previous month through the selected day. Pure re
 
 The journal refetches after successful mutations. Obsolete date requests are cancelled, and previous results are cleared during loading so a failed request cannot show another day's values. The monthly SVG chart plots actual readings in date/slot order and includes a data table. Lines connect recorded points; they do not represent measurements in the gaps.
 
+Request failures have an explicit retry state rather than appearing as empty data. An expired session returns to sign-in. Destructive actions use a native dialog that keeps errors visible and prevents dismissal while deletion is pending. Report tabs use roving keyboard focus and associated tab panels. Date navigation cannot advance beyond today.
+
 ## Verification boundaries
 
 Domain tests cover calendar boundaries and calculations. API tests exercise real PostgreSQL with separate users and concurrent writes inside a disposable schema. React Testing Library checks form behavior at the API boundary. Chromium checks cover the rendered workflow and responsive layout. See [verification evidence](VERIFICATION.md) for observed results and remaining limitations.

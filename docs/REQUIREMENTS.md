@@ -20,8 +20,8 @@ Required behavior and deliverables for the glucose tracker.
 | Highest, lowest, average to one decimal, count | Reports.js and UI formatting; calculation tests |
 | Empty report state | Null statistics and friendly message; domain/browser checks |
 | Daily readings listed with slots | Four slot cards include recorded value/unit and edit/delete controls |
-| A few meaningful tests | Domain/API tests plus React Testing Library form/chart tests |
-| Public repo, regular commits | https://github.com/GlenTheReb/sweety; genuine milestone commits with subsequent pushes |
+| A few meaningful tests | 28 domain/API/seed and React component tests |
+| Public repo, regular commits | https://github.com/GlenTheReb/sweety; incremental implementation commits |
 | README installation/database/server/client/tests | Root README quick start and commands table |
 | Complete .env.example without secrets | Placeholder JWT/demo password, local-only database values; actual .env ignored |
 | Demo-user seed with sample readings | Repeatable seed; clean-database verification; fictional values only |

@@ -11,7 +11,7 @@ Tested with Node.js 24, npm 11 and PostgreSQL 17. Use Node.js 24 LTS and Docker 
 1. Clone the repository and open its root directory.
 2. Run `npm ci` to install the versions recorded in the lockfile.
 3. Copy `.env.example` to `.env` (`Copy-Item .env.example .env` in PowerShell, or `cp .env.example .env` on macOS/Linux).
-4. Replace `JWT_SECRET` with a random value of at least 32 characters. You can generate one with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`. Choose a local `DEMO_PASSWORD` of at least 8 characters. Keep `.env` private.
+4. Replace `JWT_SECRET` with a random value of at least 32 characters. You can generate one with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`. Choose a local `DEMO_PASSWORD` of at least 8 characters and at most 72 bytes. Keep `.env` private.
 5. Run `docker compose up -d db`. Wait for `docker compose ps` to show the database as healthy. The supplied database credentials are for local development only, and the published port binds to localhost.
 6. Run `npm run db:migrate`, then `npm run db:seed`.
 7. Run `npm run dev` and open **http://127.0.0.1:5173**.

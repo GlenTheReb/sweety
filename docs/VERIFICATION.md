@@ -1,41 +1,42 @@
 # Verification evidence
 
-Verified on 6 November 2026 using Node.js 24.19.0, npm 11.17.0 and PostgreSQL 17 in Docker.
+Verified on 6 November 2026 with Node.js 24.19.0, npm 11.17.0, PostgreSQL 17 in Docker, and Chromium.
 
 ## Automated checks
 
-`npm test` exercises real PostgreSQL in an isolated temporary schema, plus pure domain tests. It covers registration/password hashing, login, private listing/reporting, forbidden edits/deletes, invalid values/dates/slots, conflicting edits, simultaneous creates and edits, database constraints, logout, report updates, leap years, year boundaries, rounding and empty reports.
+All **28 tests passed**, with no failures or skips:
 
-All 12 server/domain tests and 8 React component tests passed with zero failures or skips. `npm run build` compiles the React client successfully. `npm audit` reported zero known vulnerabilities at installation time; this is a point-in-time dependency check, not a security guarantee.
+- **13 backend/domain/seed tests:** bcrypt storage, login, user isolation, forbidden edits/deletes, value/date/slot validation, edit conflicts, concurrent creates and edits, database constraints, report updates, calendar boundaries, rounding and empty reports. The real seed script is run twice in an isolated schema to verify email normalization and repeatability.
+- **15 React component tests:** required/range/integer/future-date errors, edit request fields, server conflicts, accessible chart data, failed-report recovery, keyboard tabs, day navigation, expired sessions, deletion confirmation, pending requests and failed deletion.
 
-A fresh `git archive` checkout was extracted into a new temporary folder. `npm ci`, migration into a newly created empty PostgreSQL database, demo seeding, all 20 tests and the build passed. The disposable database was removed afterwards. This confirmed that no untracked file or pre-existing app data was required for setup. The API was also started from the fresh checkout with external environment configuration; health, seeded login and daily reports passed.
+A fresh archived checkout passed `npm ci`, migration into an empty database, demo seeding with a spaced/mixed-case email, all 28 tests and `npm run build`. Disposable test schemas and the verification database were removed afterwards. Setup did not rely on ignored local instructions, coaching files or existing app data. Installation reported zero known vulnerabilities at verification time; this is not a security guarantee.
 
 ## Browser checks
 
-The flow under test was: registration/login → journal → add/edit/delete readings → refresh reports → logout. Playwright was used because the separate Browser plugin/skill was not available in this session.
+The flow under test was registration/login → journal → add/edit/delete → report refresh → logout. Playwright exercised the actual app at `http://127.0.0.1:5173`.
 
 | Check | Observed outcome |
 | --- | --- |
-| Page identity | Correct local URL and Sweety title |
-| Meaningful render | Auth screen and journal render without a framework error overlay |
-| Create | Four slot readings save and appear with values and units |
-| Required error | Empty value shows “Please enter a glucose value.” in the dialog |
-| Edit | Changing 94 to 95 updates the daily average to 117.8 |
-| Delete | Confirming deletion reduces the count; adding the reading again restores it |
-| Periods | November 6 yields November 1–6 and October 1–31 |
-| Empty report | Previous month without entries shows the friendly empty state |
-| Session | Login persists across reload; logout persists across reload |
-| Failed date request | Simulated HTTP 503 shows an error, clears previous-day readings and recovers after selecting a working date |
-| Keyboard | Native dialog closes on Escape and manages modal focus |
-| Responsive | Desktop 1440×1000 and mobile 390×844; no horizontal mobile overflow |
-| Console | No runtime app errors on final authenticated render; unauthenticated session probes produce expected HTTP 401 responses |
+| Page identity and render | Correct URL/title, meaningful content, no framework error overlay |
+| CRUD | Four slot readings displayed; edits update averages; confirmed deletion reduces count; adding the entry again restores it |
+| Required-value error | Visible error, invalid-field association and focus on the value input |
+| Report periods | November 6 produces November 1–6 and October 1–31; empty periods show a friendly state |
+| Failed report | Simulated HTTP 503 shows a distinct error; retry succeeds without stale or falsely empty data |
+| Deletion failure | Simulated HTTP 503 remains in the dialog and preserves the reading |
+| Day navigation | Previous/next/today update the selected day; next-day navigation is disabled on today |
+| Keyboard tabs | Arrow keys, Home and End move selection/focus and identify the active panel |
+| Session expiry | Simulated HTTP 401 returns to sign-in with an explanation; login recovers; stale notices clear |
+| Logout | Session clears and sign-in remains after reload |
+| Chart | Seven fictional readings match the chronological data table; point details are available on keyboard focus |
+| Responsive layout | Desktop 1440×1000 and mobile 390×844; no horizontal mobile overflow |
+| Console | No unexplained runtime errors; unauthenticated probes and deliberately injected HTTP failures produce expected network errors |
 
-Screenshots: [desktop journal](screenshots/daily-journal.png), [mobile journal](screenshots/mobile-journal.png), [validation dialog](screenshots/reading-validation.png), [monthly trend](screenshots/monthly-trend.png). All displayed account/readings are fictional. Screenshots were visually inspected for clipping, spacing, typography, controls and error readability.
+## Accessibility
 
-## Bonus verification
+Axe checks for WCAG 2 A/AA, 2.1 AA and 2.2 AA rules reported **zero violations** in the tested sign-in, desktop journal/chart, reading-error dialog, delete dialog and mobile journal states. Initial contrast failures in action buttons and chart labels were corrected. Manual checks covered keyboard report navigation, invalid-field focus and modal dismissal. Automated checks do not establish full accessibility conformance.
 
-React Testing Library covers required values, range/integer failures, future dates, edit request fields, server conflicts and accessible chart data. The monthly chart was checked in Chromium with seven actual fictional-account readings: the table contained all seven in chronological order, and keyboard focus exposed the point details.
+## Screenshots and limitations
 
-## Limits
+[Desktop journal](screenshots/daily-journal.png), [monthly trend](screenshots/monthly-trend.png), [mobile journal](screenshots/mobile-journal.png), and [validation dialog](screenshots/reading-validation.png) show fictional account data. Each screenshot was inspected for typography, contrast, spacing, clipping and control readability.
 
-Browser checks used Chromium; Safari/Firefox and assistive-technology testing remain unverified. There is no deployed production environment.
+Safari, Firefox and screen-reader testing remain unverified. There is no hosted production deployment. Production readiness limitations are described in the README.
