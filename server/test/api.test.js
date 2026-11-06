@@ -168,6 +168,31 @@ test("real PostgreSQL API: authentication, isolation, edits and concurrent const
     },
   );
   await t.test(
+    "concurrent edits cannot claim the same destination slot",
+    async () => {
+      const ids = [];
+      for (const slot of ["After lunch", "After dinner"]) {
+        const response = await alice
+          .post("/api/readings")
+          .send({ ...payload, date: "2026-01-17", slot })
+          .expect(201);
+        ids.push(response.body.reading.id);
+      }
+      const responses = await Promise.all(
+        ids.map((id) =>
+          alice
+            .put(`/api/readings/${id}`)
+            .send({
+              ...payload,
+              date: "2026-01-18",
+              slot: "Morning (fasting)",
+            }),
+        ),
+      );
+      assert.deepEqual(responses.map((r) => r.status).sort(), [200, 409]);
+    },
+  );
+  await t.test(
     "database rejects invalid values, slots and future dates independently",
     async () => {
       const user = (await db.query("SELECT id FROM users WHERE name='Alice'"))
@@ -185,7 +210,7 @@ test("real PostgreSQL API: authentication, isolation, edits and concurrent const
           { code: "23514" },
         );
       }
-      await alice.post("/api/auth/logout").send({}).expect(200);
+      await alice.post("/api/auth/logout").expect(200);
       await alice.get("/api/auth/me").expect(401);
     },
   );

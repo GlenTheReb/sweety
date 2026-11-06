@@ -859,4 +859,25 @@ select:focus {
     padding: 23px;
   }
 }
-.modal { border:0; margin:auto; } .modal::backdrop { background:#142e2599; }
+.modal {
+  border: 0;
+  margin: auto;
+}
+.modal::backdrop {
+  background: #142e2599;
+}
+.mobile-logout {
+  display: none;
+}
+@media (max-width: 550px) {
+  .mobile-logout {
+    display: block;
+    padding: 7px 12px;
+    font-size: 11px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

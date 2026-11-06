@@ -15,6 +15,7 @@ export function createApp({ db, jwtSecret, timeZone = "Asia/Kolkata" }) {
   app.use("/api", (req, res, next) => {
     if (
       ["POST", "PUT"].includes(req.method) &&
+      req.path !== "/auth/logout" &&
       (!req.is("application/json") || !req.body || Array.isArray(req.body))
     ) {
       return res.status(400).json({ error: "Send a JSON object." });
@@ -56,11 +57,9 @@ export function createApp({ db, jwtSecret, timeZone = "Asia/Kolkata" }) {
       password.length < 8 ||
       Buffer.byteLength(password) > 72
     )
-      return res
-        .status(400)
-        .json({
-          error: "Password must be at least 8 characters and at most 72 bytes.",
-        });
+      return res.status(400).json({
+        error: "Password must be at least 8 characters and at most 72 bytes.",
+      });
     try {
       const hash = await bcrypt.hash(password, 12);
       const { rows } = await db.query(
@@ -146,11 +145,9 @@ export function createApp({ db, jwtSecret, timeZone = "Asia/Kolkata" }) {
           .status(409)
           .json({ error: "You can add only 4 readings per day." });
       if (rows.some((r) => r.slot === slot))
-        return res
-          .status(409)
-          .json({
-            error: `You already have an ${slot} reading for this date.`,
-          });
+        return res.status(409).json({
+          error: `You already have an ${slot} reading for this date.`,
+        });
       const result = id
         ? await db.query(
             `UPDATE readings SET reading_date=$1,slot=$2,value_mg_dl=$3 WHERE id=$4 AND user_id=$5 RETURNING ${columns}`,
@@ -165,17 +162,13 @@ export function createApp({ db, jwtSecret, timeZone = "Asia/Kolkata" }) {
       res.status(id ? 200 : 201).json({ reading: result.rows[0] });
     } catch (error) {
       if (error.code === "23505")
-        return res
-          .status(409)
-          .json({
-            error: `You already have an ${slot} reading for this date.`,
-          });
+        return res.status(409).json({
+          error: `You already have an ${slot} reading for this date.`,
+        });
       if (error.code === "23514")
-        return res
-          .status(400)
-          .json({
-            error: "The reading does not meet the date, slot or value rules.",
-          });
+        return res.status(400).json({
+          error: "The reading does not meet the date, slot or value rules.",
+        });
       next(error);
     }
   };

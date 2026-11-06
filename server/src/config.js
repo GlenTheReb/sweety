@@ -10,7 +10,11 @@ export const config = {
 
 export function checkConfig() {
   if (!config.databaseUrl) throw new Error("DATABASE_URL is required.");
-  if (!config.jwtSecret || config.jwtSecret.length < 32) {
+  if (
+    !config.jwtSecret ||
+    config.jwtSecret.length < 32 ||
+    config.jwtSecret.startsWith("replace-with")
+  ) {
     throw new Error("JWT_SECRET must contain at least 32 characters.");
   }
   new Intl.DateTimeFormat("en-US", { timeZone: config.timeZone });
