@@ -40,7 +40,7 @@ test("real PostgreSQL API: authentication, isolation, edits and concurrent const
         .post("/api/auth/register")
         .send({
           name: "Alice",
-          email: "Alice@Example.com",
+          email: "  Alice@Example.com  ",
           password: "a-test-password",
         })
         .expect(201);
@@ -180,13 +180,11 @@ test("real PostgreSQL API: authentication, isolation, edits and concurrent const
       }
       const responses = await Promise.all(
         ids.map((id) =>
-          alice
-            .put(`/api/readings/${id}`)
-            .send({
-              ...payload,
-              date: "2026-01-18",
-              slot: "Morning (fasting)",
-            }),
+          alice.put(`/api/readings/${id}`).send({
+            ...payload,
+            date: "2026-01-18",
+            slot: "Morning (fasting)",
+          }),
         ),
       );
       assert.deepEqual(responses.map((r) => r.status).sort(), [200, 409]);

@@ -8,6 +8,8 @@ import { buildReports } from "./reports.js";
 
 const columns =
   "id, to_char(reading_date, 'YYYY-MM-DD') AS date, slot, value_mg_dl AS value";
+const duplicateMessage = (slot) =>
+  `You already have ${slot.startsWith("After") ? "an" : "a"} ${slot} reading for this date.`;
 export function createApp({ db, jwtSecret, timeZone = "Asia/Kolkata" }) {
   const app = express();
   app.disable("x-powered-by");
@@ -41,7 +43,11 @@ export function createApp({ db, jwtSecret, timeZone = "Asia/Kolkata" }) {
     res.json({ ok: true });
   });
   app.post("/api/auth/register", async (req, res, next) => {
-    const { name, email, password } = req.body;
+    const { name, password } = req.body;
+    const email =
+      typeof req.body.email === "string"
+        ? req.body.email.trim().toLowerCase()
+        : "";
     if (typeof name !== "string" || !name.trim() || name.length > 100)
       return res
         .status(400)
@@ -146,7 +152,7 @@ export function createApp({ db, jwtSecret, timeZone = "Asia/Kolkata" }) {
           .json({ error: "You can add only 4 readings per day." });
       if (rows.some((r) => r.slot === slot))
         return res.status(409).json({
-          error: `You already have an ${slot} reading for this date.`,
+          error: duplicateMessage(slot),
         });
       const result = id
         ? await db.query(
@@ -163,7 +169,7 @@ export function createApp({ db, jwtSecret, timeZone = "Asia/Kolkata" }) {
     } catch (error) {
       if (error.code === "23505")
         return res.status(409).json({
-          error: `You already have an ${slot} reading for this date.`,
+          error: duplicateMessage(slot),
         });
       if (error.code === "23514")
         return res.status(400).json({

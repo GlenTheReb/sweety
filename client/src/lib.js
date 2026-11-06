@@ -19,12 +19,25 @@ export const label = (date) =>
     year: "numeric",
     timeZone: "UTC",
   });
+export function shiftDay(date, offset) {
+  const result = new Date(`${date}T00:00:00Z`);
+  result.setUTCDate(result.getUTCDate() + offset);
+  return result.toISOString().slice(0, 10);
+}
 export async function api(path, options = {}) {
-  const response = await fetch(`/api${path}`, {
-    ...options,
-    headers: { "Content-Type": "application/json" },
-    credentials: "same-origin",
-  });
+  let response;
+  try {
+    response = await fetch(`/api${path}`, {
+      ...options,
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+    });
+  } catch (error) {
+    if (error.name === "AbortError") throw error;
+    throw new Error(
+      "Unable to reach Sweety. Check your connection and try again.",
+    );
+  }
   const body =
     response.status === 204 ? {} : await response.json().catch(() => ({}));
   if (!response.ok) {

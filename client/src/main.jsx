@@ -8,6 +8,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [sessionError, setSessionError] = useState("");
+  const [sessionNotice, setSessionNotice] = useState("");
   useEffect(() => {
     api("/auth/me")
       .then((body) => setUser(body.user))
@@ -34,17 +35,23 @@ function App() {
   return user ? (
     <Dashboard
       user={user}
+      onSessionExpired={() => {
+        setSessionNotice("Your session has expired. Please log in again.");
+        setUser(null);
+      }}
       onLogout={async () => {
-        try {
-          await api("/auth/logout", { method: "POST" });
-          setUser(null);
-        } catch (err) {
-          window.alert(err.message);
-        }
+        await api("/auth/logout", { method: "POST" });
+        setUser(null);
       }}
     />
   ) : (
-    <Auth onLogin={setUser} />
+    <Auth
+      onLogin={(profile) => {
+        setSessionNotice("");
+        setUser(profile);
+      }}
+      notice={sessionNotice}
+    />
   );
 }
 createRoot(document.getElementById("root")).render(<App />);

@@ -3,8 +3,14 @@ import { pool } from "../src/db.js";
 import { config } from "../src/config.js";
 import { todayIn, reportRanges } from "../src/dates.js";
 import { SLOTS } from "../src/validation.js";
-if (!process.env.DEMO_PASSWORD || process.env.DEMO_PASSWORD.length < 8)
-  throw new Error("Set DEMO_PASSWORD to at least 8 characters.");
+if (
+  !process.env.DEMO_PASSWORD ||
+  process.env.DEMO_PASSWORD.length < 8 ||
+  Buffer.byteLength(process.env.DEMO_PASSWORD) > 72
+)
+  throw new Error(
+    "Set DEMO_PASSWORD to at least 8 characters and at most 72 bytes.",
+  );
 const client = await pool.connect();
 try {
   await client.query("BEGIN");
@@ -12,7 +18,7 @@ try {
     "INSERT INTO users (name,email,password_hash) VALUES ($1,$2,$3) ON CONFLICT(email) DO UPDATE SET password_hash=EXCLUDED.password_hash RETURNING id",
     [
       "Demo member",
-      process.env.DEMO_EMAIL || "demo@sweety.local",
+      (process.env.DEMO_EMAIL || "demo@sweety.local").trim().toLowerCase(),
       await bcrypt.hash(process.env.DEMO_PASSWORD, 12),
     ],
   );

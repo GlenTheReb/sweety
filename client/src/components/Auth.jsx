@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Brand from "./Brand.jsx";
 import { api } from "../lib.js";
-export default function Auth({ onLogin }) {
+export default function Auth({ onLogin, notice }) {
   const [register, setRegister] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -54,6 +54,11 @@ export default function Auth({ onLogin }) {
               ? "Create your account to record your first reading."
               : "Log in to pick up where you left off."}
           </p>
+          {notice && (
+            <p className="notice" role="status">
+              {notice}
+            </p>
+          )}
           <form onSubmit={submit}>
             {register && (
               <label>
@@ -71,6 +76,7 @@ export default function Auth({ onLogin }) {
               <input
                 name="email"
                 type="email"
+                spellCheck={false}
                 autoComplete="email"
                 required
                 maxLength="254"
@@ -99,6 +105,7 @@ export default function Auth({ onLogin }) {
           <p className="switch">
             {register ? "Already have an account?" : "New to Sweety?"}{" "}
             <button
+              disabled={busy}
               onClick={() => {
                 setRegister(!register);
                 setError("");

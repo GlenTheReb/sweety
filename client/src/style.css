@@ -1,10 +1,111 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
 :root {
+  font-variant-numeric: tabular-nums;
   font-family: "DM Sans", sans-serif;
   color: #253b38;
   background: #f7f9f8;
   font-synthesis: none;
   font-size: 14px;
+}
+button,
+a,
+input,
+select {
+  touch-action: manipulation;
+}
+button {
+  min-height: 44px;
+}
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+input::placeholder {
+  color: #65766d;
+}
+.skip-link {
+  position: fixed;
+  z-index: 5;
+  top: 12px;
+  left: 12px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: #185f53;
+  color: white;
+  transform: translateY(-180%);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+.date-controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.day-navigation {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.day-navigation button {
+  padding: 7px 12px;
+  min-width: 40px;
+}
+.day-navigation button:first-child,
+.day-navigation button:last-child {
+  font-size: 22px;
+  line-height: 1;
+}
+.date-controls .date-picker {
+  margin: 0;
+}
+.danger {
+  min-height: 44px;
+  border: 0;
+  background: #a13f32;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.danger:hover {
+  background: #812f25;
+}
+.delete-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 18px;
+  margin-top: 20px;
+  border: 1px solid #e2e8e3;
+  border-radius: 9px;
+}
+.delete-preview strong {
+  font-size: 24px;
+}
+.delete-preview small {
+  font-size: 12px;
+  font-weight: 400;
+}
+.report-error .secondary {
+  margin-top: 18px;
+}
+.report-tabs button:hover {
+  background: #f0f5f1;
+}
+.report-tabs button:focus-visible,
+[role="tabpanel"]:focus-visible {
+  outline: 2px solid #185f53;
+  outline-offset: 3px;
+}
+.modal {
+  overscroll-behavior: contain;
+}
+.recorded {
+  border-top: 3px solid #729f84;
 }
 * {
   box-sizing: border-box;
@@ -69,14 +170,14 @@ h3 {
   font-size: 14px;
 }
 .muted {
-  color: #738580;
+  color: #52685e;
   line-height: 1.65;
 }
 .tiny {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1.7px;
   font-weight: 700;
-  color: #768e85;
+  color: #52685e;
   margin-bottom: 12px;
 }
 .brand {
@@ -140,9 +241,9 @@ h3 {
   height: 100vh;
 }
 .side-caption {
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 1.8px;
-  color: #a0aaa5;
+  color: #52685e;
   margin: 53px 14px 15px;
 }
 .nav-active {
@@ -174,9 +275,9 @@ h3 {
   font-weight: 600;
 }
 .side-note p {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.8;
-  color: #7f8d78;
+  color: #52685e;
   margin: 0;
 }
 .profile {
@@ -197,7 +298,7 @@ h3 {
   place-items: center;
 }
 .profile strong {
-  font-size: 11px;
+  font-size: 12px;
   display: block;
   max-width: 115px;
   overflow: hidden;
@@ -206,15 +307,15 @@ h3 {
 }
 .profile small {
   display: block;
-  color: #8c9993;
-  font-size: 9px;
+  color: #52685e;
+  font-size: 12px;
   margin-top: 4px;
 }
 .profile button {
   border: 0;
   background: transparent;
   font-size: 20px;
-  color: #7e8d85;
+  color: #52685e;
   margin-left: auto;
 }
 .workspace {
@@ -229,8 +330,8 @@ h3 {
   align-items: center;
   justify-content: space-between;
   padding: 0 45px;
-  font-size: 11px;
-  color: #97a39c;
+  font-size: 12px;
+  color: #52685e;
 }
 .topbar strong {
   color: #5c7068;
@@ -238,7 +339,7 @@ h3 {
   margin-left: 8px;
 }
 .private-note {
-  color: #738b7c;
+  color: #52685e;
 }
 .content {
   max-width: 1230px;
@@ -283,16 +384,16 @@ h3 {
 }
 .date-bar small {
   display: block;
-  color: #8a9a90;
-  font-size: 10px;
+  color: #52685e;
+  font-size: 12px;
   margin-top: 5px;
 }
 .date-picker {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #7b8e82;
-  font-size: 11px;
+  color: #52685e;
+  font-size: 12px;
 }
 .date-picker input {
   padding: 8px 10px;
@@ -309,8 +410,8 @@ h3 {
   gap: 16px;
 }
 .completion {
-  color: #7b9083;
-  font-size: 10px;
+  color: #52685e;
+  font-size: 12px;
   background: #eef2ee;
   border-radius: 20px;
   padding: 6px 10px;
@@ -345,14 +446,14 @@ h3 {
   font-size: 22px;
 }
 .slot-number {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
-  color: #b4bdb5;
+  color: #52685e;
 }
 .slot-card h3 {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  color: #7d8c82;
+  color: #52685e;
   margin-bottom: 8px;
 }
 .reading-value {
@@ -363,8 +464,8 @@ h3 {
   margin: 0 0 15px;
 }
 .reading-value span {
-  font-size: 10px;
-  color: #8a988e;
+  font-size: 12px;
+  color: #52685e;
   letter-spacing: 0;
   margin-left: 8px;
 }
@@ -376,15 +477,15 @@ h3 {
   background: none;
   border: 0;
   padding: 0;
-  font-size: 10px;
-  color: #53806a;
+  font-size: 12px;
+  color: #52685e;
 }
 .reading-actions button:last-child {
-  color: #9a8a84;
+  color: #a24535;
 }
 .slot-empty {
   font-size: 17px;
-  color: #8a998e;
+  color: #52685e;
   margin: 15px 0;
 }
 .add-slot {
@@ -392,7 +493,7 @@ h3 {
   border: 0;
   padding: 0;
   color: #41775b;
-  font-size: 11px;
+  font-size: 12px;
 }
 .report-panel {
   background: #fff;
@@ -401,7 +502,7 @@ h3 {
   padding: 26px 27px;
 }
 .report-panel .muted {
-  font-size: 11px;
+  font-size: 12px;
   margin-bottom: 18px;
 }
 .report-symbol {
@@ -422,8 +523,8 @@ h3 {
 .report-tabs button {
   border: 0;
   background: transparent;
-  color: #8b998f;
-  font-size: 11px;
+  color: #52685e;
+  font-size: 12px;
   padding: 11px 15px 14px;
   border-bottom: 2px solid transparent;
 }
@@ -433,8 +534,8 @@ h3 {
   font-weight: 700;
 }
 .report-range {
-  font-size: 10px;
-  color: #8b9a8e;
+  font-size: 12px;
+  color: #52685e;
   margin: 19px 0;
 }
 .stats-grid {
@@ -453,8 +554,8 @@ h3 {
   border: 0;
 }
 .stats-grid > div > span {
-  font-size: 11px;
-  color: #849486;
+  font-size: 12px;
+  color: #52685e;
 }
 .stats-grid strong {
   display: block;
@@ -464,9 +565,9 @@ h3 {
   letter-spacing: -0.8px;
 }
 .stats-grid small {
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 400;
-  color: #8f9d90;
+  color: #52685e;
   margin-left: 7px;
   letter-spacing: 0;
 }
@@ -485,14 +586,14 @@ h3 {
 }
 .empty-report p {
   font-size: 12px;
-  color: #95a08e;
+  color: #52685e;
   margin: 7px 0 0;
 }
 footer {
   display: flex;
   justify-content: space-between;
-  color: #9ca79d;
-  font-size: 9px;
+  color: #52685e;
+  font-size: 12px;
   margin-top: 27px;
 }
 label {
@@ -573,8 +674,8 @@ select:focus {
   margin-top: 25px;
 }
 .hint {
-  font-size: 10px;
-  color: #8a9b8c;
+  font-size: 12px;
+  color: #52685e;
   margin-top: -9px;
 }
 .auth {
@@ -602,7 +703,7 @@ select:focus {
   color: #67927a;
 }
 .auth-story p {
-  color: #7c9080;
+  color: #52685e;
   font-size: 13px;
   max-width: 300px;
   line-height: 1.7;
@@ -622,7 +723,7 @@ select:focus {
 .auth-art small {
   font-size: 12px;
   margin-left: 10px;
-  color: #80937e;
+  color: #52685e;
 }
 .auth-art svg {
   display: block;
@@ -655,8 +756,8 @@ select:focus {
 }
 .switch {
   text-align: center;
-  font-size: 11px;
-  color: #8a998a;
+  font-size: 12px;
+  color: #52685e;
   margin-top: 25px;
 }
 .switch button {
@@ -749,7 +850,7 @@ select:focus {
     align-items: flex-start;
   }
   .page-heading .primary {
-    font-size: 11px;
+    font-size: 12px;
     padding: 12px;
   }
   .private-note {
@@ -759,7 +860,7 @@ select:focus {
     font-size: 0;
   }
   .date-picker input {
-    font-size: 11px;
+    font-size: 12px;
   }
   .auth-story h1 {
     font-size: 32px;
@@ -814,7 +915,7 @@ select:focus {
     font-size: 16px;
   }
   .report-tabs button {
-    font-size: 10px;
+    font-size: 12px;
     padding: 11px 9px;
   }
   .stats-grid {
@@ -873,7 +974,7 @@ select:focus {
   .mobile-logout {
     display: block;
     padding: 7px 12px;
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -892,8 +993,8 @@ select:focus {
 }
 .trend .section-heading > span,
 .trend-detail {
-  font-size: 11px;
-  color: #68816e;
+  font-size: 12px;
+  color: #52685e;
 }
 .trend > .muted {
   margin: 8px 0 12px;
@@ -906,7 +1007,7 @@ select:focus {
 }
 .trend svg text {
   font: 11px sans-serif;
-  fill: #738879;
+  fill: #52685e;
 }
 .trend svg circle:focus {
   outline: 2px solid #8ba464;
@@ -934,8 +1035,8 @@ select:focus {
 }
 .trend caption {
   text-align: left;
-  font-size: 11px;
-  color: #829383;
+  font-size: 12px;
+  color: #52685e;
   padding-bottom: 12px;
 }
 .trend th,
@@ -954,5 +1055,111 @@ select:focus {
 @media (max-width: 550px) {
   .trend svg text {
     font-size: 22px;
+  }
+}
+
+.reading-actions {
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.reading-actions button {
+  min-height: 36px;
+  padding: 7px 9px;
+  border-radius: 6px;
+  background: #f0f5f1;
+  font-size: 12px;
+}
+.reading-actions button:last-child {
+  color: #a24535;
+  background: #fcf1ed;
+}
+.reading-actions button:hover {
+  background: #e2ede4;
+}
+.reading-actions button:last-child:hover {
+  background: #f7e2d9;
+}
+.add-slot {
+  min-height: 40px;
+  font-size: 13px;
+}
+.slot-card {
+  padding: 20px 18px;
+}
+.slot-card h3 {
+  font-size: 13px;
+}
+.profile strong {
+  font-size: 13px;
+}
+.profile small {
+  font-size: 12px;
+}
+.report-tabs button {
+  font-size: 13px;
+}
+label {
+  font-size: 14px;
+}
+.primary,
+.secondary {
+  font-size: 14px;
+}
+.icon-button {
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+}
+@media (max-width: 1100px) {
+  .date-bar {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+@media (max-width: 550px) {
+  .date-bar {
+    align-items: flex-start;
+  }
+  .date-controls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .date-controls .date-picker input {
+    width: 140px;
+    font-size: 14px;
+  }
+  input,
+  select {
+    font-size: 16px;
+  }
+  .page-heading .primary {
+    font-size: 14px;
+  }
+  .date-bar small {
+    font-size: 12px;
+  }
+  .slot-card {
+    padding: 18px 12px;
+  }
+  .reading-actions {
+    gap: 5px;
+  }
+  .reading-actions button {
+    padding: 7px;
+    min-height: 40px;
+  }
+  .slot-card h3 {
+    min-height: 32px;
+  }
+  .reading-value {
+    font-size: 34px;
+  }
+  footer {
+    font-size: 12px;
+  }
+  .tiny {
+    font-size: 11px;
   }
 }
