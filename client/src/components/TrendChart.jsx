@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { label, SLOTS } from "../lib.js";
 
 export default function TrendChart({ readings }) {
   const [active, setActive] = useState(null);
+  const chart = useRef(null);
+  const [width, setWidth] = useState(680);
+  useLayoutEffect(() => {
+    const element = chart.current;
+    if (!element || !window.ResizeObserver) return;
+    const resize = () => {
+      const measured = Math.round(element.getBoundingClientRect().width);
+      if (measured > 0) setWidth(measured);
+    };
+    resize();
+    const observer = new ResizeObserver(resize);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [readings.length > 0]);
   const points = [...readings].sort(
     (a, b) =>
       a.date.localeCompare(b.date) ||
@@ -20,8 +34,11 @@ export default function TrendChart({ readings }) {
     SLOTS.indexOf(p.slot) / 4;
   const start = time(points[0]),
     end = time(points.at(-1));
+  const right = width - 20;
   const x = (p) =>
-    end === start ? 335 : 55 + ((time(p) - start) / (end - start)) * 580;
+    end === start
+      ? (55 + right) / 2
+      : 55 + ((time(p) - start) / (end - start)) * (right - 55);
   const y = (p) => 145 - ((p.value - low) / (high - low)) * 115;
   const selected = active == null ? null : points[active];
   return (
@@ -35,7 +52,8 @@ export default function TrendChart({ readings }) {
         details.
       </p>
       <svg
-        viewBox="0 0 680 180"
+        ref={chart}
+        viewBox={`0 0 ${width} 180`}
         role="img"
         aria-label={`Line chart of ${points.length} recorded glucose values. A data table follows.`}
       >
@@ -45,7 +63,7 @@ export default function TrendChart({ readings }) {
             <g key={value}>
               <line
                 x1="55"
-                x2="635"
+                x2={right}
                 y1={height}
                 y2={height}
                 stroke="#e6ede7"
@@ -87,7 +105,7 @@ export default function TrendChart({ readings }) {
         <text x="55" y="173">
           {label(points[0].date)}
         </text>
-        <text x="635" y="173" textAnchor="end">
+        <text x={right} y="173" textAnchor="end">
           {label(points.at(-1).date)}
         </text>
       </svg>

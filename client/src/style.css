@@ -1039,7 +1039,9 @@ select:focus {
   overflow: visible;
 }
 .trend svg text {
-  font: 11px sans-serif;
+  font:
+    14px "DM Sans",
+    sans-serif;
   fill: #52685e;
 }
 .trend svg circle:focus {
@@ -1080,14 +1082,6 @@ select:focus {
 @media (max-width: 550px) {
   .trend h3 {
     font-size: var(--text-secondary);
-  }
-  .trend svg text {
-    font-size: 13px;
-  }
-}
-@media (max-width: 550px) {
-  .trend svg text {
-    font-size: 22px;
   }
 }
 
@@ -1458,9 +1452,6 @@ select,
   }
   .auth-form {
     padding: 36px 24px;
-  }
-  .trend svg text {
-    font-size: 26px;
   }
   footer {
     font-size: 0.875rem;
