@@ -9,7 +9,7 @@ export default function TrendChart({ readings }) {
     const element = chart.current;
     if (!element || !window.ResizeObserver) return;
     const resize = () => {
-      const measured = Math.round(element.getBoundingClientRect().width);
+      const measured = element.clientWidth;
       if (measured > 0) setWidth(measured);
     };
     resize();
