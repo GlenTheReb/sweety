@@ -42,7 +42,9 @@ export async function api(path, options = {}) {
     response.status === 204 ? {} : await response.json().catch(() => ({}));
   if (!response.ok) {
     const error = new Error(
-      body.error || "Unable to complete the request. Please try again.",
+      response.status === 429
+        ? "Too many sign-in attempts. Please wait a few minutes and try again."
+        : body.error || "Unable to complete the request. Please try again.",
     );
     error.status = response.status;
     throw error;

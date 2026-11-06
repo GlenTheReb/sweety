@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
-import { pool } from "../src/db.js";
+import { createMigrationPool } from "../src/db.js";
+const pool = createMigrationPool();
 import { config } from "../src/config.js";
 import { todayIn, reportRanges } from "../src/dates.js";
 import { SLOTS } from "../src/validation.js";

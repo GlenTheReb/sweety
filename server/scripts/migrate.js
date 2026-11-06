@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
-import { pool } from "../src/db.js";
+import { createMigrationPool } from "../src/db.js";
+const pool = createMigrationPool();
 try {
   await pool.query(
     await readFile(new URL("../sql/001_init.sql", import.meta.url), "utf8"),

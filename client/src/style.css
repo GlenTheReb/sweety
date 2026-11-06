@@ -1475,3 +1475,49 @@ select,
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+.demo-access {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #dce5dc;
+  border-radius: 12px;
+  background: #f4f7f1;
+}
+.demo-access strong {
+  font-size: 1rem;
+}
+.demo-access p {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin: 8px 0 14px;
+}
+.demo-access dl {
+  margin: 0;
+}
+.demo-access dl > div {
+  margin-top: 10px;
+}
+.demo-access dt {
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+.demo-access dd {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+  font-size: 0.9375rem;
+}
+.demo-access code {
+  user-select: all;
+}
+@media (max-width: 599px) {
+  .date-bar .date-controls {
+    width: 100%;
+    align-items: stretch;
+  }
+  .date-controls .day-navigation,
+  .date-controls .date-picker {
+    width: 100%;
+  }
+  .date-controls .date-picker {
+    text-align: left;
+  }
+}

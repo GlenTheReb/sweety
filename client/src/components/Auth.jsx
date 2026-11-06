@@ -102,6 +102,29 @@ export default function Auth({ onLogin, notice }) {
               <span>↗</span>
             </button>
           </form>
+          {import.meta.env.VITE_DEMO_MODE === "true" && !register && (
+            <aside className="demo-access" aria-label="Demo account">
+              <strong>Take a look around</strong>
+              <p>
+                Use the shared demo account, or create your own account with
+                fictional readings.
+              </p>
+              <dl>
+                <div>
+                  <dt>Email</dt>
+                  <dd>
+                    <code>demo@sweety.local</code>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Password</dt>
+                  <dd>
+                    <code>SweetyDemo2026!</code>
+                  </dd>
+                </div>
+              </dl>
+            </aside>
+          )}
           <p className="switch">
             {register ? "Already have an account?" : "New to Sweety?"}{" "}
             <button

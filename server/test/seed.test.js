@@ -21,6 +21,7 @@ test("demo seed normalizes email and reruns without duplicating readings", async
     const env = {
       ...process.env,
       DATABASE_URL: url.href,
+      MIGRATION_DATABASE_URL: url.href,
       DEMO_EMAIL: "  Demo@Example.Local  ",
       DEMO_PASSWORD: "seed-test-only-password",
     };

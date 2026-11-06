@@ -14,6 +14,10 @@ export function createApp({ db, jwtSecret, timeZone = "Asia/Kolkata" }) {
   const app = express();
   app.disable("x-powered-by");
   app.use(express.json({ limit: "10kb" }), cookieParser());
+  app.use("/api", (_req, res, next) => {
+    res.set("Cache-Control", "private, no-store");
+    next();
+  });
   app.use("/api", (req, res, next) => {
     if (
       ["POST", "PUT"].includes(req.method) &&

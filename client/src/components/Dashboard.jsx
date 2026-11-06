@@ -370,7 +370,9 @@ export default function Dashboard({ user, onLogout, onSessionExpired }) {
             </div>
           </section>
           <footer>
-            Made for your everyday moments.
+            {import.meta.env.VITE_DEMO_MODE === "true"
+              ? "Demo environment · Please use fictional readings."
+              : "Made for your everyday moments."}
             <span>Sweety is a journal, not medical advice.</span>
           </footer>
         </div>
