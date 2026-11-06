@@ -25,6 +25,7 @@ The flow under test was: registration/login → journal → add/edit/delete read
 | Periods | November 6 yields November 1–6 and October 1–31 |
 | Empty report | Previous month without entries shows the friendly empty state |
 | Session | Login persists across reload; logout persists across reload |
+| Failed date request | Simulated HTTP 503 shows an error, clears previous-day readings and recovers after selecting a working date |
 | Keyboard | Native dialog closes on Escape and manages modal focus |
 | Responsive | Desktop 1440×1000 and mobile 390×844; no horizontal mobile overflow |
 | Console | No runtime app errors on final authenticated render; unauthenticated session probes produce expected HTTP 401 responses |

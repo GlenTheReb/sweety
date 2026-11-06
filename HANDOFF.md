@@ -2,7 +2,7 @@
 
 ## Current state
 
-Owner: Codex. Stage: verified; preparing submission draft for Glen's approval. Last updated: 6 November 2026.
+Owner: Codex. Stage: verified and published; submission draft awaits Glen's approval. Last updated: 6 November 2026.
 Required stack: React, Express, PostgreSQL. Required outcomes: authenticated private reading CRUD, strict validation, calendar reports, meaningful tests, reproducible setup, seed and screenshots.
 Submission requires Glen's confirmation. Nothing has been submitted.
 
@@ -10,7 +10,7 @@ Implemented: React journal, native reading dialog, Express cookie authentication
 
 Clean install: a fresh archived checkout passed npm ci, migration to an empty database, seeding, all 12 tests and build. Secrets and SDD.md are ignored. Public repository: https://github.com/GlenTheReb/sweety.
 
-Next: prepare the reply draft and request Glen's approval before sending. Read README.md and docs/VERIFICATION.md for commands/evidence. Do not claim Claude reviewed the project: no Claude review has occurred. The browser tool writes transient QA artifacts beneath Empl; screenshots were moved into Sweety and no Empl source/data files were edited.
+The public README was fetched successfully without authentication (HTTP 200). Gmail contains an unsent reply draft in the original employer thread with the repository link and three fictional-data screenshots. No assessment has been sent. Next: obtain Glen's explicit send confirmation, then send the existing draft and verify the sent message. Read README.md and docs/VERIFICATION.md for commands/evidence. Do not claim Claude reviewed the project: no Claude review has occurred. Browser tool screenshots were moved into Sweety; no Empl source/data files were edited.
 
 ## Codex to Claude
 
