@@ -1,3 +1,4 @@
+import Icon from "./Icon.jsx";
 import { useEffect, useState } from "react";
 import Brand from "./Brand.jsx";
 import ReadingForm from "./ReadingForm.jsx";
@@ -85,7 +86,7 @@ export default function Dashboard({ user, onLogout, onSessionExpired }) {
             onClick={logOut}
             disabled={loggingOut}
           >
-            ↪
+            {<Icon name="logout" />}
           </button>
         </div>
       </aside>
@@ -113,12 +114,14 @@ export default function Dashboard({ user, onLogout, onSessionExpired }) {
               </p>
             </div>
             <button className="primary" onClick={() => setEditing({})}>
-              ＋ &nbsp; Add reading
+              {<Icon name="add" />} Add reading
             </button>
           </section>
           <div className="date-bar">
             <div>
-              <span className="calendar-icon">▦</span>
+              <span className="calendar-icon">
+                <Icon name="calendar" />
+              </span>
               <div>
                 <strong>{label(date)}</strong>
                 <small>
@@ -134,7 +137,7 @@ export default function Dashboard({ user, onLogout, onSessionExpired }) {
                   aria-label="Previous day"
                   onClick={() => chooseDate(shiftDay(date, -1))}
                 >
-                  ‹
+                  <Icon name="previous" />
                 </button>
                 <button
                   className="secondary"
@@ -149,7 +152,7 @@ export default function Dashboard({ user, onLogout, onSessionExpired }) {
                   disabled={date >= today()}
                   onClick={() => chooseDate(shiftDay(date, 1))}
                 >
-                  ›
+                  <Icon name="next" />
                 </button>
               </div>
               <label className="date-picker">
@@ -253,7 +256,9 @@ export default function Dashboard({ user, onLogout, onSessionExpired }) {
                   A simple summary of the numbers you’ve recorded.
                 </p>
               </div>
-              <span className="report-symbol">↗</span>
+              <span className="report-symbol">
+                <Icon name="arrow" />
+              </span>
             </div>
             <div
               className="report-tabs"
