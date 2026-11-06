@@ -21,7 +21,7 @@ export function buildReports(date, readings) {
         {
           ...range,
           ...summarize(items),
-          ...(key === "daily" ? { readings: items } : {}),
+          readings: items,
         },
       ];
     }),

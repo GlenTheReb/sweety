@@ -18,6 +18,10 @@ After the server confirms success, `Dashboard.jsx` refetches the reports. It doe
 
 An empty average is null rather than zero. Zero would describe a measured value and distort the meaning of an empty report. The UI displays a friendly message instead.
 
+`TrendChart.jsx` plots actual readings in date/slot order. The horizontal axis reflects calendar time and the vertical axis has labeled glucose bounds. Connecting points does not invent readings in the gaps. A data table exposes the same values without relying on the visual. The dataset is bounded by a calendar month, so a small SVG is sufficient without a chart library.
+
+React Testing Library tests interact through labels and buttons. They verify that invalid input never calls the API, edit requests contain the correct fields, and a failed save remains an error. The API is mocked at this component boundary; separate real-database tests verify the backend. Each layer answers a different question.
+
 ## Interview practice
 
 ### 1. Why validate in the UI, API and database?

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Brand from "./Brand.jsx";
 import ReadingForm from "./ReadingForm.jsx";
+import TrendChart from "./TrendChart.jsx";
 import { api, SLOTS, SYMBOLS, today, label } from "../lib.js";
 export default function Dashboard({ user, onLogout }) {
   const [date, setDate] = useState(today);
@@ -254,6 +255,12 @@ export default function Dashboard({ user, onLogout }) {
                   </p>
                 </div>
               </div>
+            )}
+            {report !== "daily" && stats?.count > 0 && (
+              <TrendChart
+                key={`${report}-${date}-${revision}`}
+                readings={stats.readings}
+              />
             )}
           </section>
           <footer>

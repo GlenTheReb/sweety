@@ -50,6 +50,10 @@ test("reports isolate ranges, round averages and represent empty periods", () =>
     { date: "2026-01-16", value: 600 },
   ]);
   assert.equal(result.monthly.count, 2);
+  assert.deepEqual(
+    result.monthly.readings.map((r) => r.value),
+    [90, 111],
+  );
   assert.equal(result.monthly.average, 100.5);
   assert.equal(result.monthToDate.average, 102);
   assert.equal(result.daily.average, 103);

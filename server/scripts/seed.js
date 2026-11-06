@@ -17,10 +17,19 @@ try {
     ],
   );
   const today = todayIn(config.timeZone);
+  const previous = reportRanges(today).monthly;
+  const recent = [1, 2].map((offset) => {
+    const date = new Date(`${today}T00:00:00Z`);
+    date.setUTCDate(date.getUTCDate() - offset);
+    return date.toISOString().slice(0, 10);
+  });
   const dates = [
     today,
+    ...recent,
     `${today.slice(0, 7)}-01`,
-    reportRanges(today).monthly.to,
+    previous.from,
+    `${previous.from.slice(0, 7)}-15`,
+    previous.to,
   ];
   for (const date of new Set(dates))
     for (let i = 0; i < 4; i++) {

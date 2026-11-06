@@ -27,7 +27,9 @@ If using an existing PostgreSQL installation, create an empty database and set `
 | `npm run dev` | Run API and client together with automatic reload |
 | `npm run dev -w server` | Run Express at http://127.0.0.1:3001 |
 | `npm run dev -w client` | Run Vite at http://127.0.0.1:5173 with an API proxy |
-| `npm test` | Run domain and real PostgreSQL API tests |
+| `npm test` | Run domain, PostgreSQL API and React component tests |
+| `npm run test:server` | Run only domain and API tests |
+| `npm run test:client` | Run React Testing Library component tests |
 | `npm run build` | Compile the production client to `client/dist` |
 | `npm run db:migrate` | Apply the repeatable initial database schema |
 | `npm run db:seed` | Create the demo account and sample readings |
@@ -67,9 +69,9 @@ Invalid input returns 400, missing authentication 401, missing or inaccessible r
 
 ## Notes and improvements
 
-Required features are implemented; Docker database setup is the only infrastructure bonus. The app intentionally avoids medical interpretation, target ranges and treatment recommendations. A reading is a journal entry, not clinical guidance.
+Required features are implemented. Bonuses include PostgreSQL setup through `docker-compose.yml`, a line chart of actual readings with an accessible data table, and React Testing Library form tests. See the [official requirement audit](docs/ASSESSMENT-CHECKLIST.md). The app intentionally avoids medical interpretation, target ranges and treatment recommendations. A reading is a journal entry, not clinical guidance.
 
-With more time: add per-account time zones, frontend regression tests, sign-in rate limiting, password recovery, session revocation, and a paginated historical view with a chart. A production deployment also needs HTTPS, a same-origin reverse proxy for the compiled client and API, managed secrets, backups, monitoring and restrictive database access. The supplied scripts target local assessment review, and the API binds to localhost. Google Fonts improve typography when online; system fonts remain available offline.
+With more time: add per-account time zones, broader frontend regression tests, sign-in rate limiting, password recovery, session revocation, and a paginated historical view. A production deployment also needs HTTPS, a same-origin reverse proxy for the compiled client and API, managed secrets, backups, monitoring and restrictive database access. The supplied scripts target local assessment review, and the API binds to localhost. Google Fonts improve typography when online; system fonts remain available offline.
 
 This project was developed with OpenAI Codex assistance. Glen should review the code and use the [engineering walkthrough](docs/WALKTHROUGH.md) to explain the design and tradeoffs accurately. AI assistance is disclosed rather than represented as unaided work.
 

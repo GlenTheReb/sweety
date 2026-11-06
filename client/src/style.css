@@ -881,3 +881,78 @@ select:focus {
     transition: none !important;
   }
 }
+.trend {
+  border-top: 1px solid #e4eae4;
+  margin-top: 24px;
+  padding-top: 24px;
+}
+.trend h3 {
+  font-size: 14px;
+  margin: 0;
+}
+.trend .section-heading > span,
+.trend-detail {
+  font-size: 11px;
+  color: #68816e;
+}
+.trend > .muted {
+  margin: 8px 0 12px;
+}
+.trend svg {
+  display: block;
+  width: 100%;
+  max-height: 240px;
+  overflow: visible;
+}
+.trend svg text {
+  font: 11px sans-serif;
+  fill: #738879;
+}
+.trend svg circle:focus {
+  outline: 2px solid #8ba464;
+}
+.trend-detail {
+  min-height: 20px;
+}
+.trend details {
+  font-size: 12px;
+  color: #41634d;
+}
+.trend summary {
+  cursor: pointer;
+  padding: 8px 0;
+}
+.table-scroll {
+  overflow-x: auto;
+}
+.trend table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+  margin: 14px 0;
+}
+.trend caption {
+  text-align: left;
+  font-size: 11px;
+  color: #829383;
+  padding-bottom: 12px;
+}
+.trend th,
+.trend td {
+  padding: 10px;
+  border-bottom: 1px solid #e6ece5;
+}
+@media (max-width: 550px) {
+  .trend h3 {
+    font-size: 12px;
+  }
+  .trend svg text {
+    font-size: 13px;
+  }
+}
+@media (max-width: 550px) {
+  .trend svg text {
+    font-size: 22px;
+  }
+}
