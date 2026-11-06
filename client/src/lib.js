@@ -25,8 +25,14 @@ export async function api(path, options = {}) {
     headers: { "Content-Type": "application/json" },
     credentials: "same-origin",
   });
-  const body = response.status === 204 ? {} : await response.json();
-  if (!response.ok)
-    throw new Error(body.error || "Unable to complete the request.");
+  const body =
+    response.status === 204 ? {} : await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const error = new Error(
+      body.error || "Unable to complete the request. Please try again.",
+    );
+    error.status = response.status;
+    throw error;
+  }
   return body;
 }

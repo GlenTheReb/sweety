@@ -6,7 +6,9 @@ Verified on 6 November 2026 using Node.js 24.19.0, npm 11.17.0 and PostgreSQL 17
 
 `npm test` exercises real PostgreSQL in an isolated temporary schema, plus pure domain tests. It covers registration/password hashing, login, private listing/reporting, forbidden edits/deletes, invalid values/dates/slots, conflicting edits, simultaneous creates and edits, database constraints, logout, report updates, leap years, year boundaries, rounding and empty reports.
 
-`npm run build` compiles the React client successfully. `npm audit` reported zero known vulnerabilities at installation time; this is a point-in-time dependency check, not a security guarantee.
+All 12 tests passed with zero failures or skips. `npm run build` compiles the React client successfully. `npm audit` reported zero known vulnerabilities at installation time; this is a point-in-time dependency check, not a security guarantee.
+
+A fresh `git archive` checkout was extracted into a new temporary folder. `npm ci`, migration into a newly created empty PostgreSQL database, demo seeding, all 12 tests and the build passed. The disposable database was removed afterwards. This confirmed that no untracked file or pre-existing app data was required for setup.
 
 ## Browser checks
 
@@ -31,4 +33,4 @@ Screenshots: [desktop journal](screenshots/daily-journal.png), [mobile journal](
 
 ## Limits
 
-Browser checks used Chromium; Safari/Firefox and assistive-technology testing remain unverified. There is no deployed production environment. Claude has not reviewed the app. Clean-install verification results will be recorded before delivery.
+Browser checks used Chromium; Safari/Firefox and assistive-technology testing remain unverified. There is no deployed production environment. Claude has not reviewed the app.

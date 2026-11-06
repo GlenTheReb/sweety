@@ -14,6 +14,7 @@ export default function Dashboard({ user, onLogout }) {
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
+    setData(null);
     setError("");
     api(`/reports?date=${date}`, { signal: controller.signal })
       .then(setData)

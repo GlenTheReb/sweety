@@ -2,13 +2,15 @@
 
 ## Current state
 
-Owner: Codex. Stage: final verification and delivery preparation. Last updated: 6 November 2026.
+Owner: Codex. Stage: verified; preparing submission draft for Glen's approval. Last updated: 6 November 2026.
 Required stack: React, Express, PostgreSQL. Required outcomes: authenticated private reading CRUD, strict validation, calendar reports, meaningful tests, reproducible setup, seed and screenshots.
 Submission requires Glen's confirmation. Nothing has been submitted.
 
 Implemented: React journal, native reading dialog, Express cookie authentication, bcrypt, private CRUD, PostgreSQL constraints and future-date trigger, all three reports, seed and Docker database setup. Browser checks at 1440×1000 and 390×844 cover registration, login/reload, CRUD, required-value errors, month ranges, empty periods and logout. Screenshots are in docs/screenshots. The initial automated suite passed; final fresh-install check is in progress.
 
-Next: finish the clean-install check, publish the authorized public repository, prepare the reply draft, and request Glen's approval before sending. Read README.md and docs/VERIFICATION.md for commands/evidence. Do not claim Claude reviewed the project: no Claude review has occurred.
+Clean install: a fresh archived checkout passed npm ci, migration to an empty database, seeding, all 12 tests and build. Secrets and SDD.md are ignored. Public repository: https://github.com/GlenTheReb/sweety.
+
+Next: prepare the reply draft and request Glen's approval before sending. Read README.md and docs/VERIFICATION.md for commands/evidence. Do not claim Claude reviewed the project: no Claude review has occurred. The browser tool writes transient QA artifacts beneath Empl; screenshots were moved into Sweety and no Empl source/data files were edited.
 
 ## Codex to Claude
 
