@@ -38,4 +38,4 @@ React Testing Library covers required values, range/integer failures, future dat
 
 ## Limits
 
-Browser checks used Chromium; Safari/Firefox and assistive-technology testing remain unverified. There is no deployed production environment. Claude has not reviewed the app.
+Browser checks used Chromium; Safari/Firefox and assistive-technology testing remain unverified. There is no deployed production environment.

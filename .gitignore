@@ -5,4 +5,8 @@ dist/
 !.env.example
 coverage/
 SDD.md
+/AGENTS.md
+/CLAUDE.md
+/HANDOFF.md
+/docs/WALKTHROUGH.md
 *.log

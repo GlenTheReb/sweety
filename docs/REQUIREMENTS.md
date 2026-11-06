@@ -1,6 +1,6 @@
-# Official assessment audit
+# Requirements checklist
 
-Source: the original Kenpath assignment email, reread on 6 November 2026. Due Monday, 9 November 2026. Submission requires Glen's confirmation. This checklist records required behavior separately from optional bonuses.
+Required behavior and deliverables for the glucose tracker.
 
 | Official requirement | Implementation and evidence |
 | --- | --- |
@@ -25,10 +25,7 @@ Source: the original Kenpath assignment email, reread on 6 November 2026. Due Mo
 | README installation/database/server/client/tests | Root README quick start and commands table |
 | Complete .env.example without secrets | Placeholder JWT/demo password, local-only database values; actual .env ignored |
 | Demo-user seed with sample readings | Repeatable seed; clean-database verification; fictional values only |
-| Screenshots or 2–3 minute recording | Desktop, mobile and validation PNGs; chart evidence added after bonus verification |
+| Screenshots or a short recording | Desktop, mobile and validation PNGs; monthly trend screenshot included |
 | Notes on assumptions/improvements | README Notes and Design sections |
-| Reply directly to email with repo and evidence | Correct-thread Gmail draft prepared; send awaits Glen's approval |
 
 Optional bonuses selected: PostgreSQL Docker Compose setup, monthly line chart with accessible table, React Testing Library tests. Redis, BullMQ, doctor roles and pagination are intentionally outside this delivery.
-
-The email contains no explicit rule about agentic coding or AI assistance. The official junior role lists generative-AI tools as useful experience and describes a technical walkthrough. The README discloses Codex assistance; docs/WALKTHROUGH.md supports Glen's preparation. No claim of independent Claude review is made.

@@ -69,12 +69,10 @@ Invalid input returns 400, missing authentication 401, missing or inaccessible r
 
 ## Notes and improvements
 
-Required features are implemented. Bonuses include PostgreSQL setup through `docker-compose.yml`, a line chart of actual readings with an accessible data table, and React Testing Library form tests. See the [official requirement audit](docs/ASSESSMENT-CHECKLIST.md). The app intentionally avoids medical interpretation, target ranges and treatment recommendations. A reading is a journal entry, not clinical guidance.
+Required features are implemented. Bonuses include PostgreSQL setup through `docker-compose.yml`, a line chart of actual readings with an accessible data table, and React Testing Library form tests. See the [requirements checklist](docs/REQUIREMENTS.md). The app intentionally avoids medical interpretation, target ranges and treatment recommendations. A reading is a journal entry, not clinical guidance.
 
 With more time: add per-account time zones, broader frontend regression tests, sign-in rate limiting, password recovery, session revocation, and a paginated historical view. A production deployment also needs HTTPS, a same-origin reverse proxy for the compiled client and API, managed secrets, backups, monitoring and restrictive database access. The supplied scripts target local assessment review, and the API binds to localhost. Google Fonts improve typography when online; system fonts remain available offline.
 
-This project was developed with OpenAI Codex assistance. Glen should review the code and use the [engineering walkthrough](docs/WALKTHROUGH.md) to explain the design and tradeoffs accurately. AI assistance is disclosed rather than represented as unaided work.
+## Development
 
-## Agent collaboration
-
-`AGENTS.md` contains shared working rules. `CLAUDE.md` imports those rules for Claude compatibility. [HANDOFF.md](HANDOFF.md) holds the current state and separate Codex/Claude update sections. Both agents need access to the same checkout, or must exchange committed updates. One agent owns implementation at a time; the other can review. The handoff file does not automatically transmit messages. The local, ignored `SDD.md` remains Codex's architectural reference.
+OpenAI Codex assisted implementation. The automated checks, browser verification and known limitations are documented in [VERIFICATION.md](docs/VERIFICATION.md). See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for design decisions and tradeoffs.
