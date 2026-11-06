@@ -1,42 +1,42 @@
 # Verification evidence
 
-Verified on 6 November 2026 with Node.js 24.19.0, npm 11.17.0, PostgreSQL 17 in Docker, and Chromium.
+Verified on 6 November 2026 with Node.js 24.19.0, npm 11, PostgreSQL 17 and Chromium/Playwright. Hosted app: [sweety-jade.vercel.app](https://sweety-jade.vercel.app).
 
 ## Automated checks
 
-All **28 tests passed**, with no failures or skips:
+All **29 tests passed** with no failures or skips: 13 backend/domain/seed tests and 16 frontend tests. Backend coverage includes bcrypt storage, ownership, invalid values/dates/slots, conflict handling, concurrent inserts/edits, database constraints, report calculations and repeatable normalized seeding. Frontend coverage includes form validation, API errors (including non-JSON 429 responses), chronological chart data, report recovery, keyboard tabs, dates, expired sessions and deletion states. The production build passes.
 
-- **13 backend/domain/seed tests:** bcrypt storage, login, user isolation, forbidden edits/deletes, value/date/slot validation, edit conflicts, concurrent creates and edits, database constraints, report updates, calendar boundaries, rounding and empty reports. The real seed script is run twice in an isolated schema to verify email normalization and repeatability.
-- **15 React component tests:** required/range/integer/future-date errors, edit request fields, server conflicts, accessible chart data, failed-report recovery, keyboard tabs, day navigation, expired sessions, deletion confirmation, pending requests and failed deletion.
+An earlier reviewed 28-test release also passed installation from a fresh archived checkout, migration/seed into an empty database, tests and build. The current 29-test version passed against the development database using disposable test schemas. A fresh-checkout run was not repeated for the typography/deployment changes. Installation reported zero known vulnerabilities when checked; this is not a security guarantee.
 
-A fresh archived checkout passed `npm ci`, migration into an empty database, demo seeding with a spaced/mixed-case email, all 28 tests and `npm run build`. Disposable test schemas and the verification database were removed afterwards. Setup did not rely on ignored local instructions, coaching files or existing app data. Installation reported zero known vulnerabilities at verification time; this is not a security guarantee.
+## Hosted flow
 
-## Browser checks
+The tested story is registration/login → journal → create/edit/delete → persisted PostgreSQL data → refreshed reports → logout. Vercel Services serves frontend/API on one HTTPS origin with Neon Free PostgreSQL in Singapore.
 
-The flow under test was registration/login → journal → add/edit/delete → report refresh → logout. Playwright exercised the actual app at `http://127.0.0.1:5173`.
+| Boundary or behavior   | Observed outcome                                                                                                                                                            |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Page identity/render   | Correct URL/title, meaningful journal, no framework overlay                                                                                                                 |
+| API/database health    | GET /api/health returns 200 and {"ok":true}                                                                                                                                 |
+| Authentication         | Demo login 200; unauthenticated profile 401; logout returns to sign-in                                                                                                      |
+| Cookie/privacy         | HttpOnly, Secure, SameSite Strict, Path=/api; API Cache-Control is private/no-store                                                                                         |
+| Seed persistence       | 28 fictional readings persisted across the power interruption                                                                                                               |
+| Reports for 6 November | Daily 4, MTD 16, previous month 12; each average 117.5, high 132, low 94                                                                                                    |
+| Hosted CRUD            | New fictional account registered (201); 112 saved through UI, survived reload, edited to 119; average updated; confirmed delete reduced count to 0                          |
+| Validation             | Duplicate 409; future date 400; visible required-value feedback and focus on the invalid field                                                                              |
+| Ownership              | Demo account could not update/delete another account's reading: both 404                                                                                                    |
+| Preview isolation      | A preview-only reading was visible in preview while production stayed empty for that date; probe removed afterward                                                          |
+| Platform protection    | Active valid WAF rule combines POST login/register: 20 requests per IP per 600 seconds. Repeated invalid requests triggered 429; the UI displayed its friendly wait message |
+| Typography/layout      | 16px body text; 320/390/1024/1440px widths fit without horizontal page overflow; chart labels measure 14px at each width                                                    |
+| Enlarged presentation  | Chart labels scale to 28 screen pixels with 200% CSS zoom; 720px viewport reflow fits. This is a focused simulation, not full browser-zoom certification                    |
+| Keyboard               | Report ArrowRight selects/focuses the next tab; invalid-value submission focuses the value field                                                                            |
 
-| Check | Observed outcome |
-| --- | --- |
-| Page identity and render | Correct URL/title, meaningful content, no framework error overlay |
-| CRUD | Four slot readings displayed; edits update averages; confirmed deletion reduces count; adding the entry again restores it |
-| Required-value error | Visible error, invalid-field association and focus on the value input |
-| Report periods | November 6 produces November 1–6 and October 1–31; empty periods show a friendly state |
-| Failed report | Simulated HTTP 503 shows a distinct error; retry succeeds without stale or falsely empty data |
-| Deletion failure | Simulated HTTP 503 remains in the dialog and preserves the reading |
-| Day navigation | Previous/next/today update the selected day; next-day navigation is disabled on today |
-| Keyboard tabs | Arrow keys, Home and End move selection/focus and identify the active panel |
-| Session expiry | Simulated HTTP 401 returns to sign-in with an explanation; login recovers; stale notices clear |
-| Logout | Session clears and sign-in remains after reload |
-| Chart | Seven fictional readings match the chronological data table; point details are available on keyboard focus |
-| Responsive layout | Desktop 1440×1000 and mobile 390×844; no horizontal mobile overflow |
-| Console | No unexplained runtime errors; unauthenticated probes and deliberately injected HTTP failures produce expected network errors |
+Earlier local browser checks also verified simulated 503 retry, failed deletion preserving data, and 401 session recovery. Expected 401/400/409/429 network errors from these probes are not application crashes. No unexplained application error was observed in the checked flows.
 
-## Accessibility
+## Accessibility and screenshots
 
-Axe checks for WCAG 2 A/AA, 2.1 AA and 2.2 AA rules reported **zero violations** in the tested sign-in, desktop journal/chart, reading-error dialog, delete dialog and mobile journal states. Initial contrast failures in action buttons and chart labels were corrected. Manual checks covered keyboard report navigation, invalid-field focus and modal dismissal. Automated checks do not establish full accessibility conformance.
+Axe 4.11 checks for WCAG 2 A/AA, 2.1 AA and 2.2 AA reported **zero violations** in checked hosted sign-in, desktop journal/chart, mobile journal/chart, reading-error and delete-dialog states. Keyboard/focus checks supplement the automated audit. This does not establish complete accessibility conformance or screen-reader compatibility.
 
-## Screenshots and limitations
+[Daily journal](screenshots/daily-journal.png), [monthly trend](screenshots/monthly-trend.png), [mobile journal](screenshots/mobile-journal.png), [mobile trend](screenshots/mobile-trend.png), and [validation feedback](screenshots/reading-validation.png) were captured from the hosted app and visually inspected. All displayed data is fictional.
 
-[Desktop journal](screenshots/daily-journal.png), [monthly trend](screenshots/monthly-trend.png), [mobile journal](screenshots/mobile-journal.png), and [validation dialog](screenshots/reading-validation.png) show fictional account data. Each screenshot was inspected for typography, contrast, spacing, clipping and control readability.
+## Limitations
 
-Safari, Firefox and screen-reader testing remain unverified. There is no hosted production deployment. Production readiness limitations are described in the README.
+Safari, Firefox, actual browser 200% zoom controls and screen-reader testing remain unverified. Free hosting/database cold starts can delay first requests. The shared demo is editable by all visitors; individual accounts are separate. One empty fictional verification account remains in production; its test reading was deleted. Password recovery, per-session revocation, individual time zones, backup/restore drills and operational monitoring remain future work. This assessment environment is intended for fictional data.

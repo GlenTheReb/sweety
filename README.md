@@ -2,6 +2,10 @@
 
 A calm, personal blood glucose journal built with **React, Express and PostgreSQL**. Record four daily check-ins and explore daily, month-to-date and previous-month summaries.
 
+**[Open the live app](https://sweety-jade.vercel.app)** · [Source repository](https://github.com/GlenTheReb/sweety)
+
+Try the shared fictional demo with `demo@sweety.local` / `SweetyDemo2026!`, or create your own account using fictional details. The shared demo is editable by everyone who uses it. Please do not enter real health information in this assessment environment.
+
 ![Daily journal](docs/screenshots/daily-journal.png)
 
 ## Quick start
@@ -71,7 +75,7 @@ Invalid input returns 400, missing authentication 401, missing or inaccessible r
 
 Required features are implemented. Bonuses include PostgreSQL setup through `docker-compose.yml`, a line chart of actual readings with an accessible data table, and React Testing Library form tests. See the [requirements checklist](docs/REQUIREMENTS.md). The app intentionally avoids medical interpretation, target ranges and treatment recommendations. A reading is a journal entry, not clinical guidance.
 
-With more time: add per-account time zones, broader frontend regression tests, sign-in rate limiting, password recovery, session revocation, and a paginated historical view. A production deployment also needs HTTPS, a same-origin reverse proxy for the compiled client and API, managed secrets, backups, monitoring and restrictive database access. The supplied scripts target local assessment review, and the API binds to localhost. Google Fonts improve typography when online; system fonts remain available offline.
+With more time: add per-account time zones, broader browser regression coverage, password recovery, session revocation and a paginated historical view. The hosted assessment uses Vercel Services with HTTPS and same-origin frontend/API routing, Neon Free PostgreSQL in Singapore, sensitive environment variables and a free WAF rule limiting login/registration to 20 POST requests per IP per 10 minutes. API responses are private and not cached. Fonts are self-hosted with their licenses. This is an assessment demo; clinical use, backup/restore drills, operational monitoring and full accessibility certification are outside this delivery.
 
 ## Development
 

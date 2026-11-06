@@ -27,3 +27,11 @@ Request failures have an explicit retry state rather than appearing as empty dat
 ## Verification boundaries
 
 Domain tests cover calendar boundaries and calculations. API tests exercise real PostgreSQL with separate users and concurrent writes inside a disposable schema. React Testing Library checks form behavior at the API boundary. Chromium checks cover the rendered workflow and responsive layout. See [verification evidence](VERIFICATION.md) for observed results and remaining limitations.
+
+## Hosted runtime and readable layout
+
+Vercel Services routes static Vite assets and Express API requests through one HTTPS origin. server/src/vercel.js initializes the app lazily without opening a local listening port. Each function instance reuses a bounded PostgreSQL pool registered with the Vercel lifecycle; records remain in Neon PostgreSQL across refreshes and instance restarts. Migration/seed commands can use a separate direct database connection. API responses use Cache-Control: private, no-store. Secrets are sensitive Vercel values, with separate session-signing secrets for production and preview. Preview database branches are configured separately from production.
+
+The hosted project has one free WAF rule: 20 combined POST login/registration requests per IP per 600 seconds. Rejected requests receive a platform response; the client handles non-JSON 429 responses with a useful retry message. Shared networks may share the same allowance. Local development does not inherit platform firewall rules.
+
+The visual system uses self-hosted licensed DM Sans/Manrope fonts, 16px body text and semantic type tokens. Reading cards use four columns on wide screens, two on tablets and one compact card per row on phones. TrendChart observes its actual rendered width and derives the SVG coordinate system from it, preserving 14px chart labels rather than shrinking all text with a fixed-width viewBox. Its observer disconnects on unmount. The accessible chronological table remains available alongside the chart.
