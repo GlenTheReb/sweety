@@ -8,7 +8,7 @@ Verified on 6 November 2026 using Node.js 24.19.0, npm 11.17.0 and PostgreSQL 17
 
 All 12 server/domain tests and 8 React component tests passed with zero failures or skips. `npm run build` compiles the React client successfully. `npm audit` reported zero known vulnerabilities at installation time; this is a point-in-time dependency check, not a security guarantee.
 
-A fresh `git archive` checkout was extracted into a new temporary folder. `npm ci`, migration into a newly created empty PostgreSQL database, demo seeding, all 12 tests and the build passed. The disposable database was removed afterwards. This confirmed that no untracked file or pre-existing app data was required for setup.
+A fresh `git archive` checkout was extracted into a new temporary folder. `npm ci`, migration into a newly created empty PostgreSQL database, demo seeding, all 20 tests and the build passed. The disposable database was removed afterwards. This confirmed that no untracked file or pre-existing app data was required for setup. The API was also started from the fresh checkout with external environment configuration; health, seeded login and daily reports passed.
 
 ## Browser checks
 
@@ -30,7 +30,7 @@ The flow under test was: registration/login → journal → add/edit/delete read
 | Responsive | Desktop 1440×1000 and mobile 390×844; no horizontal mobile overflow |
 | Console | No runtime app errors on final authenticated render; unauthenticated session probes produce expected HTTP 401 responses |
 
-Screenshots: [desktop journal](screenshots/daily-journal.png), [mobile journal](screenshots/mobile-journal.png), [validation dialog](screenshots/reading-validation.png). All displayed account/readings are fictional. Screenshots were visually inspected for clipping, spacing, typography, controls and error readability.
+Screenshots: [desktop journal](screenshots/daily-journal.png), [mobile journal](screenshots/mobile-journal.png), [validation dialog](screenshots/reading-validation.png), [monthly trend](screenshots/monthly-trend.png). All displayed account/readings are fictional. Screenshots were visually inspected for clipping, spacing, typography, controls and error readability.
 
 ## Bonus verification
 

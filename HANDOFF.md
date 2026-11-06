@@ -2,7 +2,7 @@
 
 ## Current state
 
-Owner: Codex. Stage: official-spec audit completed; chart/form-test bonuses under final verification. Last updated: 6 November 2026.
+Owner: Codex. Stage: official-spec audit and final verification complete; published; unsent draft awaits Glen’s confirmation. Last updated: 6 November 2026.
 Required stack: React, Express, PostgreSQL. Required outcomes: authenticated private reading CRUD, strict validation, calendar reports, meaningful tests, reproducible setup, seed and screenshots.
 Submission requires Glen's confirmation. Nothing has been submitted.
 
@@ -10,7 +10,7 @@ Implemented: React journal, native reading dialog, Express cookie authentication
 
 Clean install: a fresh archived checkout passed npm ci, migration to an empty database, seeding, all 12 tests and build. Secrets and SDD.md are ignored. Public repository: https://github.com/GlenTheReb/sweety.
 
-The public README was fetched successfully without authentication (HTTP 200). Gmail contains an unsent reply draft in the original employer thread with the repository link and three fictional-data screenshots. No assessment has been sent. The draft needs refreshing to mention the 20 tests and attach the new chart screenshot before requesting approval. Next: finish fresh-install verification of bonus dependencies, update the draft, obtain Glen's explicit send confirmation, then verify the sent message. Read README.md and docs/VERIFICATION.md for commands/evidence. Do not claim Claude reviewed the project: no Claude review has occurred. Browser tool screenshots were moved into Sweety; no Empl source/data files were edited.
+The public README was fetched successfully without authentication (HTTP 200). Gmail contains an unsent reply draft in the original employer thread with the repository link and four fictional-data screenshots. No assessment has been sent. The draft has been refreshed with all 20 passing tests and four screenshots, including the monthly trend. Fresh dependency installation, empty-database migration/seed, all 20 tests, build and API startup/login/report smoke checks passed. Next: obtain Glen’s explicit send confirmation, send the existing draft, then verify the sent message. Read README.md and docs/VERIFICATION.md for commands/evidence. Do not claim Claude reviewed the project: no Claude review has occurred. Browser tool screenshots were moved into Sweety; no Empl source/data files were edited.
 
 ## Codex to Claude
 
